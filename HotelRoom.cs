@@ -11,8 +11,9 @@ namespace Asignment2
     {
         private int _roomNo;
         private bool _isAvailable;
-        private double _price;
+        private double _price = 100;
         private string _guest;
+
         public int RoomNo 
         {
             get  => _roomNo; 
@@ -23,7 +24,7 @@ namespace Asignment2
                 {
                     _roomNo = value;
                 }
-                else Console.WriteLine("Invalid input");
+                else throw new ArgumentException("Please input room number again");
             }
         }
         public bool IsAvailable 
@@ -33,14 +34,43 @@ namespace Asignment2
             set => _isAvailable=value;
         }
         public double Price 
-        { get => throw new NotImplementedException(); 
-          set => throw new NotImplementedException(); 
+        { get => _price; 
+          set
+            {
+                if (value > 0)
+                {
+                    _price = value;
+                }
+                else throw new ArgumentException("Please input price again");
+            } 
         }
-        public string Guest { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public string GetDescription()
+        public string Guest
         {
-            throw new NotImplementedException();
+            get
+            {
+                if (string.IsNullOrEmpty(_guest))
+                {
+                    return "N/A";
+                }
+
+                return _guest;
+            }
+            set
+            {
+                _guest = value;
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                StringBuilder desc = new StringBuilder();
+                desc.AppendLine($"Room number: {RoomNo}").
+                    AppendLine($"Price: {Price} dollars").
+                    Append($"Description: This is a hotel room");
+                return desc.ToString();
+            }
         }
     }
 }

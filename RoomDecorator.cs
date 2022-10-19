@@ -6,7 +6,34 @@ using System.Threading.Tasks;
 
 namespace Asignment2
 {
-    internal class RoomDecorator
+    internal abstract class RoomDecorator : IHotelRoom
     {
+        protected IHotelRoom wrappee;
+        public RoomDecorator(IHotelRoom wrappee)
+        {
+            this.wrappee = wrappee;
+        }
+        public int RoomNo
+        {
+            get => wrappee.RoomNo;
+            set => wrappee.RoomNo = value;
+        }
+        public bool IsAvailable 
+        { 
+            get => wrappee.IsAvailable; 
+            set => wrappee.IsAvailable = value; 
+        }
+        public virtual double Price 
+        { 
+            get => wrappee.Price;
+            set => wrappee.Price = value; 
+        }
+        public string Guest 
+        { 
+            get => wrappee.Guest;
+            set => wrappee.Guest = value;
+        }
+
+        public virtual string Description => wrappee.Description;
     }
 }
