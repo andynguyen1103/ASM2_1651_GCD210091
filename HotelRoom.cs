@@ -12,7 +12,7 @@ namespace Asignment2
         private int _roomNo;
         private bool _isAvailable;
         private double _price = 100;
-        private string _guest;
+        private string _guest= String.Empty;
 
         public int RoomNo 
         {
@@ -44,6 +44,8 @@ namespace Asignment2
                 else throw new ArgumentException("Please input price again");
             } 
         }
+
+        //the guest name
         public string Guest
         {
             get
@@ -61,6 +63,7 @@ namespace Asignment2
             }
         }
 
+        //get the description of the room including room num, price, availble?, description
         public string Description
         {
             get
@@ -68,9 +71,17 @@ namespace Asignment2
                 StringBuilder desc = new StringBuilder();
                 desc.AppendLine($"Room number: {RoomNo}").
                     AppendLine($"Price: {Price} dollars").
+                    AppendLine($"Status : {(IsAvailable ? "Available" : "Unavailable")}"). //check if the room is available
                     Append($"Description: This is a hotel room");
                 return desc.ToString();
             }
+        }
+
+        public HotelRoom(int roomNo, double price)
+        {
+            this.RoomNo = roomNo;
+            this.Price = price;
+            this.IsAvailable = true;
         }
     }
 }
