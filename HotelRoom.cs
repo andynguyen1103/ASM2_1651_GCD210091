@@ -11,7 +11,7 @@ namespace Asignment2
     {
         private int _roomNo;
         private bool _isAvailable;
-        private double _price = 100;
+        private double _price;
         private string _guest= String.Empty;
 
         public int RoomNo 
@@ -24,7 +24,7 @@ namespace Asignment2
                 {
                     _roomNo = value;
                 }
-                else throw new ArgumentException("Please input room number again");
+                else Console.WriteLine("Please input room number again");
             }
         }
         public bool IsAvailable 
@@ -41,7 +41,7 @@ namespace Asignment2
                 {
                     _price = value;
                 }
-                else throw new ArgumentException("Please input price again");
+                else Console.WriteLine("Please input price again");
             } 
         }
 
@@ -64,17 +64,19 @@ namespace Asignment2
         }
 
         //get the description of the room including room num, price, availble?, description
-        public string Description
+        public string GetDescription()
         {
-            get
-            {
                 StringBuilder desc = new StringBuilder();
                 desc.AppendLine($"Room number: {RoomNo}").
-                    AppendLine($"Price: {Price} dollars").
                     AppendLine($"Status : {(IsAvailable ? "Available" : "Unavailable")}"). //check if the room is available
+                    AppendLine($"Guest: {Guest}").
                     Append($"Description: This is a hotel room");
                 return desc.ToString();
-            }
+        }
+
+        public string DisplayPrice()
+        {
+            return $"Price: {Price}";
         }
 
         public HotelRoom(int roomNo, double price)

@@ -12,6 +12,8 @@ namespace Asignment2
         bool IsAvailable { get; set; }
         double Price { get; set; }
         string Guest { get; set; }
-        string Description { get;}
+        string GetDescription();
+
+        string DisplayPrice();
     }
 }

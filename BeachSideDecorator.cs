@@ -15,10 +15,10 @@ namespace Asignment2
 
         public override double Price 
         { 
-            get => Math.Round(base.Price*1.2,1); //bump the price and round it to the first digit
-            set => base.Price = value; 
+            get => Math.Round(wrappee.Price*1.2,1); //bump the price and round it to the first digit
+            set => wrappee.Price = value; 
         }
-        public override string Description => base.Description + " with beautiful beach view";
+        public override string GetDescription() => base.GetDescription() + " with beautiful beach view";
 
 
     }

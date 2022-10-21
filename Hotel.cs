@@ -36,11 +36,17 @@ namespace Asignment2
         //return the description of all the available rooms
         public string GetEmptyRoomsDetails()
         {
+            var availableRooms = hotelRooms.FindAll((r) => r.IsAvailable);
             StringBuilder allDescription = new StringBuilder();
-            foreach (var room in hotelRooms.FindAll((r)=>r.IsAvailable))
+            if (availableRooms.Count()!=0)
             {
-                allDescription.AppendLine(room.Description+"\n");
+                foreach (var room in availableRooms)
+                {
+                    allDescription.AppendLine(room.GetDescription()).
+                                    AppendLine(room.DisplayPrice() + "\n"); 
+                }
             }
+
             return allDescription.ToString();
             
         }
@@ -49,10 +55,21 @@ namespace Asignment2
             StringBuilder allDescription = new StringBuilder();
             foreach (var room in hotelRooms)
             {
-                allDescription.AppendLine(room.Description + "\n");
+                allDescription.AppendLine(room.GetDescription()).
+                                AppendLine(room.DisplayPrice() + "\n");
             }
             return allDescription.ToString();
 
+        }
+        public string GetBookedRoomsDetails()
+        {
+            StringBuilder allDescription = new StringBuilder();
+            foreach (var room in hotelRooms.FindAll((c)=>!c.IsAvailable))
+            {
+                allDescription.AppendLine(room.GetDescription()).
+                                AppendLine(room.DisplayPrice()+"\n");
+            }
+            return allDescription.ToString();
         }
         public void AddRoom(double price, bool isBeachSide, bool isVip)
         {
@@ -108,7 +125,7 @@ namespace Asignment2
             // find the Room to be booked
             int index = hotelRooms.FindLastIndex((r) => r.RoomNo == roomNo);
 
-            if (index!=1)
+            if (index!=-1)
             {
                 hotelRooms[index].IsAvailable = false;
                 hotelRooms[index].Guest=guestName;
@@ -118,12 +135,12 @@ namespace Asignment2
             Console.WriteLine("Room not found!");
         }
 
-        public void UnbookRoom(int roomNo, string guestName)
+        public void UnbookRoom(int roomNo)
         {
             // find the Room to be booked
             int index = hotelRooms.FindLastIndex((r) => r.RoomNo == roomNo);
 
-            if (index != 1)
+            if (index != -1)
             {
                 if (!hotelRooms[index].IsAvailable)
                 {

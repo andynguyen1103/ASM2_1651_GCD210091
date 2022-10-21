@@ -15,9 +15,9 @@ namespace Asignment2
 
         public override double Price
         {
-            get => Math.Round(base.Price * 1.3, 1); //bump the price and round it to the first digit
-            set => base.Price = value;
+            get => Math.Round(wrappee.Price * 1.3, 1); //bump the price and round it to the first digit
+            set => wrappee.Price = value;
         }
-        public override string Description => base.Description + " and with VIP features";
+        public override string GetDescription() => base.GetDescription() + " and with VIP features";
     }
 }

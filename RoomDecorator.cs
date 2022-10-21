@@ -34,6 +34,11 @@ namespace Asignment2
             set => wrappee.Guest = value;
         }
 
-        public virtual string Description => wrappee.Description;
+        public virtual string GetDescription() => wrappee.GetDescription();
+
+        public string DisplayPrice()
+        {
+            return $"Price: {Price}";
+        }
     }
 }
